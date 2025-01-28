@@ -55,7 +55,7 @@ const quoteAuthorElem = document.getElementById('quote-author');
 const refreshQuoteButton = document.getElementById('refresh-quote');
 
 // ==================== State Variables ====================
-let currentProfile = 'sharvesh';
+let currentProfile = 'Mano';
 let problemsData = {};
 let allSolvedDates = [];
 let totalProblemsCount = 0;
@@ -75,11 +75,11 @@ let quotes = [];
 // ==================== Profile-based Endpoints ====================
 function getProfileEndpoint(profile) {
   switch (profile) {
-    case 'sandeep':
+    case 'Ananth':
       return 'https://alfa-leetcode-api.onrender.com/manoharanagarajan/acSubmission';
     case 'deva':
       return 'https://alfa-leetcode-api.onrender.com/devasahithiyan/acSubmission';
-    case 'sharvesh':
+    case 'Mano':
     default:
       return 'https://alfa-leetcode-api.onrender.com/20epci004/acSubmission';
   }
