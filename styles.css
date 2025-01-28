@@ -35,6 +35,7 @@ body {
   background-color: var(--background);
   color: var(--text-primary);
   line-height: 1.6;
+  overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 /* ==================== Container & Sidebar ==================== */
@@ -537,13 +538,36 @@ td.difficulty-hard   { background: #FFCDD2; color: #C62828; padding: 0.4rem 0.75
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* ==================== Responsive Design ==================== */
-@media(max-width:1200px) {
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOutDown {
+  to {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+/* ==================== Responsive Design Enhancements ==================== */
+
+/* Larger devices (Desktops and large tablets) */
+@media (max-width: 1200px) {
   .sidebar { width: 220px; }
   .custom-chart-height { height: 250px; }
 }
 
-@media(max-width:768px){
+/* Medium devices (Tablets) */
+@media (max-width: 992px) {
+  .sidebar { width: 200px; }
+  .custom-chart-height { height: 230px; }
+}
+
+/* Small devices (Landscape phones and large portrait phones) */
+@media (max-width: 768px){
   .container {
     flex-direction: column;
   }
@@ -562,6 +586,7 @@ td.difficulty-hard   { background: #FFCDD2; color: #C62828; padding: 0.4rem 0.75
     order: 3;
     flex-direction: row;
     gap: 10px;
+    overflow-x: auto; /* Allow horizontal scroll if needed */
   }
   .nav-link { padding: 0.5rem 0.75rem; font-size: 0.9em; }
   .sync-button { 
@@ -573,9 +598,15 @@ td.difficulty-hard   { background: #FFCDD2; color: #C62828; padding: 0.4rem 0.75
   .topic-wise-grid {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   }
+
+  /* Improve touch targets */
+  .nav-link, .sync-button, .refresh-quote-button {
+    padding: 0.75rem 1rem;
+  }
 }
 
-@media(max-width:480px){
+/* Extra small devices (Portrait phones) */
+@media (max-width: 480px){
   .stat-info h3 { font-size: 1em; }
   .stat-info p { font-size: 1.5em; }
   .chart-container { width: 70px; height: 70px; }
@@ -584,6 +615,85 @@ td.difficulty-hard   { background: #FFCDD2; color: #C62828; padding: 0.4rem 0.75
   .topic-wise-grid {
     grid-template-columns: 1fr;
   }
+
+  /* Ensure tables are scrollable on very small screens */
+  .topic table {
+    display: block;
+    overflow-x: auto;
+  }
+
+  /* Adjust font sizes for better readability */
+  body {
+    font-size: 14px;
+  }
+
+  .main-content {
+    padding: 1rem;
+  }
+
+  .refresh-quote-button {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9em;
+  }
+}
+
+/* ==================== Motivational Quote Section ==================== */
+.motivational-quote {
+  background: var(--surface);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 8px var(--shadow-color);
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.quote-container {
+  text-align: center;
+  position: relative;
+}
+
+.quote-text {
+  font-size: 1.5em;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeInUp 1s forwards;
+}
+
+.quote-author {
+  font-size: 1em;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeInUp 1s forwards;
+  animation-delay: 0.5s;
+}
+
+.refresh-quote-button {
+  background: var(--primary);
+  color: #ffffff;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 1em;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.refresh-quote-button:hover {
+  background: var(--secondary);
+  transform: translateY(-2px);
+}
+
+.refresh-quote-button:active {
+  transform: translateY(0);
 }
 
 /* ==================== Accessibility & Utilities ==================== */

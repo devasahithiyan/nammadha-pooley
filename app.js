@@ -16,15 +16,14 @@ import {
 
 // ==================== Firebase Configuration ====================
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "leetocode-2a84c.firebaseapp.com",
-  projectId: "leetocode-2a84c",
-  storageBucket: "leetocode-2a84c.appspot.com",
-  messagingSenderId: "855070686832",
-  appId: "1:855070686832:web:eb875763462d3dfa99feb5",
-  measurementId: "G-T887W9F6JL"
+  apiKey: "AIzaSyBmjWit0GIVgswsUWK3mBjLPOUk8Y9sS30",
+  authDomain: "nammadha-de413.firebaseapp.com",
+  projectId: "nammadha-de413",
+  storageBucket: "nammadha-de413.firebasestorage.app",
+  messagingSenderId: "480779718897",
+  appId: "1:480779718897:web:28d81a6063939207911950",
+  measurementId: "G-53LVV9BF18"
 };
-
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
@@ -50,6 +49,11 @@ const loadingSpinner = document.getElementById('loading-spinner');
 const syncButton = document.getElementById('sync-button');
 const progressAnnouncer = document.getElementById('progress-announcer');
 
+// ==================== Motivational Quotes Elements ====================
+const quoteTextElem = document.getElementById('quote-text');
+const quoteAuthorElem = document.getElementById('quote-author');
+const refreshQuoteButton = document.getElementById('refresh-quote');
+
 // ==================== State Variables ====================
 let currentProfile = 'sharvesh';
 let problemsData = {};
@@ -64,6 +68,9 @@ let difficultyDistributionChartRef = null;
 // Topic stats
 let topicSolvedCounts = {};
 let topicDifficultyCounts = {};
+
+// Quotes
+let quotes = [];
 
 // ==================== Profile-based Endpoints ====================
 function getProfileEndpoint(profile) {
@@ -99,6 +106,7 @@ tabButtons.forEach(button => {
 
 // ==================== Initial Load ====================
 document.addEventListener('DOMContentLoaded', async () => {
+  await initializeQuotes();
   await loadProblems();
   await updateOverview();
   await updateDetailedAnalysis();
@@ -471,8 +479,8 @@ function renderAverageSolvedChart(totalSolved) {
       }]
     },
     options: {
-      responsive: true, /* Added line */
-      maintainAspectRatio: false, /* Added line */
+      responsive: true,
+      maintainAspectRatio: false,
       cutout: '70%',
       plugins: {
         tooltip: { enabled: false },
@@ -481,7 +489,7 @@ function renderAverageSolvedChart(totalSolved) {
           const { ctx, width, height } = chart;
           ctx.restore();
           const fs = (height / 160).toFixed(2);
-          ctx.font = `${fs}em Inter`; /* Updated font */
+          ctx.font = `${fs}em Inter`;
           ctx.textBaseline = 'middle';
           const text = avg;
           const textX = Math.round((width - ctx.measureText(text).width) / 2);
@@ -497,9 +505,9 @@ function renderAverageSolvedChart(totalSolved) {
 
 // ==================== Update Progress Bar Utility ====================
 function updateProgressBar(barElement, percentage) {
-  progressAnnouncer.textContent = `Overall progress updated to ${percentage.toFixed(1)}%`; /* Added line */
+  progressAnnouncer.textContent = `Overall progress updated to ${percentage.toFixed(1)}%`;
   barElement.style.width = `${percentage.toFixed(1)}%`;
-  barElement.style.transition = 'width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)'; /* Updated transition */
+  barElement.style.transition = 'width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
 }
 
 /* ==================== Update Topic Progress ==================== */
@@ -585,8 +593,8 @@ function renderSolvesOverTimeChart() {
       }]
     },
     options: {
-      responsive: true, /* Added line */
-      maintainAspectRatio: false, /* Added line */
+      responsive: true,
+      maintainAspectRatio: false,
       scales: {
         x: {
           title: { display: true, text: 'Date' },
@@ -650,8 +658,8 @@ async function renderDifficultyDistributionChart() {
         }]
       },
       options: {
-        responsive: true, /* Added line */
-        maintainAspectRatio: false, /* Added line */
+        responsive: true,
+        maintainAspectRatio: false,
         plugins: {
           legend: { 
             position: 'bottom',
@@ -703,44 +711,45 @@ function renderTopicWiseDetailedAnalysis() {
 
     // Build a card
     const card = document.createElement('div');
-    card.classList.add('topic-wise-card');
+    card.classList.add('accordion-card');
+
+    // Accordion Header
+    const accordionHeader = document.createElement('div');
+    accordionHeader.classList.add('accordion-header');
 
     // Title
     const heading = document.createElement('h3');
     heading.textContent = topic.name;
-    card.appendChild(heading);
+    accordionHeader.appendChild(heading);
 
-    // Stats Row
-    const statsRow = document.createElement('div');
-    statsRow.classList.add('stats-row');
+    // Progress Info
+    const progressInfo = document.createElement('div');
+    progressInfo.classList.add('topic-progress-info');
+    progressInfo.innerHTML = `<span>${mainPct}% Completed</span>`;
+    accordionHeader.appendChild(progressInfo);
 
-    const stat1 = document.createElement('div');
-    stat1.classList.add('stat-item');
-    stat1.innerHTML = `<strong>Completed:</strong> ${solved} / ${total} (${mainPct}%)`;
-    statsRow.appendChild(stat1);
+    card.appendChild(accordionHeader);
 
-    const stat2 = document.createElement('div');
-    stat2.classList.add('stat-item');
-    stat2.innerHTML = `<strong>Easy:</strong> ${eCount} / ${totalEasy}`;
-    statsRow.appendChild(stat2);
+    // Accordion Body
+    const accordionBody = document.createElement('div');
+    accordionBody.classList.add('accordion-body');
 
-    const stat3 = document.createElement('div');
-    stat3.classList.add('stat-item');
-    stat3.innerHTML = `<strong>Medium:</strong> ${mCount} / ${totalMed}`;
-    statsRow.appendChild(stat3);
+    // Extra Stats
+    const extraStats = document.createElement('div');
+    extraStats.classList.add('topic-extra-stats');
 
-    const stat4 = document.createElement('div');
-    stat4.classList.add('stat-item');
-    stat4.innerHTML = `<strong>Hard:</strong> ${hCount} / ${totalHard}`;
-    statsRow.appendChild(stat4);
+    const longestStreak = document.createElement('div');
+    longestStreak.classList.add('stat-box');
+    longestStreak.innerHTML = `<strong>Longest Streak:</strong> 0 Days`; // Placeholder
 
-    card.appendChild(statsRow);
+    const timeSpent = document.createElement('div');
+    timeSpent.classList.add('stat-box');
+    timeSpent.innerHTML = `<strong>Time Spent:</strong> 0 Hours`; // Placeholder
 
-    // Progress Text
-    const progressLine = document.createElement('p');
-    progressLine.classList.add('progress-text');
-    progressLine.textContent = `Progress: ${mainPct}%`;
-    card.appendChild(progressLine);
+    extraStats.appendChild(longestStreak);
+    extraStats.appendChild(timeSpent);
+
+    accordionBody.appendChild(extraStats);
 
     // Chart Container
     const chartDiv = document.createElement('div');
@@ -748,8 +757,9 @@ function renderTopicWiseDetailedAnalysis() {
     const canvas = document.createElement('canvas');
     canvas.id = `topic-chart-${topic.name.replace(/\s+/g, '-')}`;
     chartDiv.appendChild(canvas);
-    card.appendChild(chartDiv);
+    accordionBody.appendChild(chartDiv);
 
+    card.appendChild(accordionBody);
     topicWiseGrid.appendChild(card);
 
     // Render a small pie chart for eCount, mCount, hCount
@@ -763,8 +773,8 @@ function renderTopicWiseDetailedAnalysis() {
         }]
       },
       options: {
-        responsive: true, /* Added line */
-        maintainAspectRatio: false, /* Added line */
+        responsive: true,
+        maintainAspectRatio: false,
         plugins: {
           legend: { 
             position: 'bottom',
@@ -780,6 +790,11 @@ function renderTopicWiseDetailedAnalysis() {
           }
         }
       }
+    });
+
+    // Add Event Listener for Accordion Toggle
+    accordionHeader.addEventListener('click', () => {
+      accordionBody.classList.toggle('open');
     });
   });
 }
@@ -898,4 +913,60 @@ function debounce(func, timeout = 500) {
     clearTimeout(timer);
     timer = setTimeout(() => func.apply(this, args), timeout);
   };
+}
+
+// ==================== Motivational Quotes ====================
+
+// Fetch Quotes from JSON File
+async function fetchQuotes() {
+  try {
+    const response = await fetch('quotes.json');
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    const data = await response.json();
+    quotes = data.quotes;
+  } catch (error) {
+    console.error('Error fetching quotes:', error);
+    quoteTextElem.textContent = "Keep pushing forward!";
+    quoteAuthorElem.textContent = "Unknown";
+  }
+}
+
+// Display a Random Quote with First Quote Priority
+function displayRandomQuote(initial = false) {
+  if (quotes.length === 0) return;
+  
+  let quote;
+  if (initial && quotes.length > 0) {
+    quote = quotes[0]; // Always display the first quote initially
+  } else {
+    const randomIndex = Math.floor(Math.random() * quotes.length);
+    quote = quotes[randomIndex];
+  }
+
+  // Animate Out
+  quoteTextElem.style.animation = 'fadeOutDown 0.5s forwards';
+  quoteAuthorElem.style.animation = 'fadeOutDown 0.5s forwards';
+
+  setTimeout(() => {
+    // Update Text
+    quoteTextElem.textContent = `"${quote.text}"`;
+    quoteAuthorElem.textContent = `- ${quote.author}`;
+
+    // Animate In
+    quoteTextElem.style.animation = 'fadeInUp 0.5s forwards';
+    quoteAuthorElem.style.animation = 'fadeInUp 0.5s forwards';
+  }, 500); // Match the fadeOutDown duration
+}
+
+// Initialize Quotes on Load
+async function initializeQuotes() {
+  await fetchQuotes();
+  displayRandomQuote(true); // Display first quote initially
+}
+
+// Event Listener for Refresh Button
+if (refreshQuoteButton) {
+  refreshQuoteButton.addEventListener('click', () => {
+    displayRandomQuote();
+  });
 }
