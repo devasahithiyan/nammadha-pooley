@@ -76,12 +76,12 @@ let quotes = [];
 function getProfileEndpoint(profile) {
   switch (profile) {
     case 'Ananth':
-      return 'https://alfa-leetcode-api.onrender.com/manoharanagarajan/acSubmission';
+      return 'https://alfa-leetcode-api.onrender.com/20epci004/acSubmission';
     case 'deva':
       return 'https://alfa-leetcode-api.onrender.com/devasahithiyan/acSubmission';
     case 'Mano':
-    default:
-      return 'https://alfa-leetcode-api.onrender.com/20epci004/acSubmission';
+      return 'https://alfa-leetcode-api.onrender.com/manoharannagarajan/acSubmission';
+    
   }
 }
 
