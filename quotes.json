@@ -1,22 +1,44 @@
 {
     "quotes": [
         {
-            "text": "Nammadha pooley",
-            "author": "Deva"
-          },
-
-      {
-        "text": "Emanodu modhu...ennodu modhadhe.",
-        "author": "Ananth"
-      },
-      {
-        "text": "Kundi la kodu...vegama odu.",
-        "author": "Ananth"
-      },
-      {
-        "text": "Salna sundal uh...nan madura mendal uh",
-        "author": "Ananth"
-      }
+            "text": "While you're sleeping, someone else is coding their way into FAANG.",
+            "author": "Unknown"
+        },
+        {
+            "text": "Every LeetCode problem you skip is another candidate getting ahead of you.",
+            "author": "Unknown"
+        },
+        {
+            "text": "If you fail, remember—someone dumber than you is getting that FAANG offer right now.",
+            "author": "Unknown"
+        },
+        {
+            "text": "Your excuses won’t get you an offer. Your consistency will.",
+            "author": "Unknown"
+        },
+        {
+            "text": "Do you want to be rich or do you want to be comfortable? Choose wisely.",
+            "author": "Unknown"
+        },
+        {
+            "text": "FAANG isn’t for the weak. If you can’t handle the grind, step aside.",
+            "author": "Unknown"
+        },
+        {
+            "text": "Your friends are chilling. You? You’ll be negotiating FAANG salaries soon.",
+            "author": "Unknown"
+        },
+        {
+            "text": "Your competition is studying right now. What’s your excuse?",
+            "author": "Unknown"
+        },
+        {
+            "text": "They say it’s impossible. Good. That means fewer people are competing with you.",
+            "author": "Unknown"
+        },
+        {
+            "text": "If it was easy, everyone would do it. Be the outlier.",
+            "author": "Unknown"
+        }
     ]
-  }
-  
+}
