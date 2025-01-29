@@ -199,7 +199,11 @@ body {
   color: var(--secondary);
 }
 
-/* ==================== Progress Bar ==================== */
+/* Progress Bar */
+.progress-card {
+  grid-column: span 2;
+}
+
 .progress-info {
   display: flex;
   align-items: center;
@@ -341,7 +345,7 @@ body {
 .topic table th {
   background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
   color: white;
-  font-weight: 600; 
+  font-weight: 600;
   letter-spacing: 0.5px;
 }
 
@@ -378,9 +382,24 @@ body {
 }
 
 /* Difficulty Badges */
-td.difficulty-easy   { background: #C8E6C9; color: #2E7D32; padding: 0.4rem 0.75rem; border-radius: 1rem; }
-td.difficulty-medium { background: #FFECB3; color: #F57C00; padding: 0.4rem 0.75rem; border-radius: 1rem; }
-td.difficulty-hard   { background: #FFCDD2; color: #C62828; padding: 0.4rem 0.75rem; border-radius: 1rem; }
+td.difficulty-easy {
+  background: #C8E6C9;
+  color: #2E7D32;
+  padding: 0.4rem 0.75rem;
+  border-radius: 1rem;
+}
+td.difficulty-medium {
+  background: #FFECB3;
+  color: #F57C00;
+  padding: 0.4rem 0.75rem;
+  border-radius: 1rem;
+}
+td.difficulty-hard {
+  background: #FFCDD2;
+  color: #C62828;
+  padding: 0.4rem 0.75rem;
+  border-radius: 1rem;
+}
 
 /* ==================== Detailed Analysis Sections ==================== */
 .graph-section,
@@ -529,13 +548,20 @@ td.difficulty-hard   { background: #FFCDD2; color: #C62828; padding: 0.4rem 0.75
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-/* ==================== Animations ==================== */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes fadeInUp {
@@ -556,18 +582,26 @@ td.difficulty-hard   { background: #FFCDD2; color: #C62828; padding: 0.4rem 0.75
 
 /* Larger devices (Desktops and large tablets) */
 @media (max-width: 1200px) {
-  .sidebar { width: 220px; }
-  .custom-chart-height { height: 250px; }
+  .sidebar {
+    width: 220px;
+  }
+  .custom-chart-height {
+    height: 250px;
+  }
 }
 
 /* Medium devices (Tablets) */
 @media (max-width: 992px) {
-  .sidebar { width: 200px; }
-  .custom-chart-height { height: 230px; }
+  .sidebar {
+    width: 200px;
+  }
+  .custom-chart-height {
+    height: 230px;
+  }
 }
 
 /* Small devices (Landscape phones and large portrait phones) */
-@media (max-width: 768px){
+@media (max-width: 768px) {
   .container {
     flex-direction: column;
   }
@@ -579,8 +613,12 @@ td.difficulty-hard   { background: #FFCDD2; color: #C62828; padding: 0.4rem 0.75
     flex-wrap: wrap;
     gap: 0.5rem;
   }
-  .sidebar-header { display: none; }
-  .profile-section { margin-left: auto; }
+  .sidebar-header {
+    display: none;
+  }
+  .profile-section {
+    margin-left: auto;
+  }
   .nav-menu {
     flex: 1 1 100%;
     order: 3;
@@ -588,30 +626,51 @@ td.difficulty-hard   { background: #FFCDD2; color: #C62828; padding: 0.4rem 0.75
     gap: 10px;
     overflow-x: auto; /* Allow horizontal scroll if needed */
   }
-  .nav-link { padding: 0.5rem 0.75rem; font-size: 0.9em; }
-  .sync-button { 
-    order: 2;
-    margin-top: 0; 
+  .nav-link {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9em;
   }
-  .main-content { padding: 1.5rem; }
-  .custom-chart-height { height: 200px; }
+  .sync-button {
+    order: 2;
+    margin-top: 0;
+  }
+  .main-content {
+    padding: 1.5rem;
+  }
+  .custom-chart-height {
+    height: 200px;
+  }
   .topic-wise-grid {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   }
 
   /* Improve touch targets */
-  .nav-link, .sync-button, .refresh-quote-button {
+  .nav-link,
+  .sync-button,
+  .refresh-quote-button {
     padding: 0.75rem 1rem;
   }
 }
 
 /* Extra small devices (Portrait phones) */
-@media (max-width: 480px){
-  .stat-info h3 { font-size: 1em; }
-  .stat-info p { font-size: 1.5em; }
-  .chart-container { width: 70px; height: 70px; }
-  .chart-container span { font-size: 0.8em; }
-  .nav-link { padding: 0.375rem 0.625rem; font-size: 0.85em; }
+@media (max-width: 480px) {
+  .stat-info h3 {
+    font-size: 1em;
+  }
+  .stat-info p {
+    font-size: 1.5em;
+  }
+  .chart-container {
+    width: 70px;
+    height: 70px;
+  }
+  .chart-container span {
+    font-size: 0.8em;
+  }
+  .nav-link {
+    padding: 0.375rem 0.625rem;
+    font-size: 0.85em;
+  }
   .topic-wise-grid {
     grid-template-columns: 1fr;
   }
@@ -697,13 +756,150 @@ td.difficulty-hard   { background: #FFCDD2; color: #C62828; padding: 0.4rem 0.75
 }
 
 /* ==================== Accessibility & Utilities ==================== */
-.sr-only { 
-  position: absolute; 
-  width: 1px; 
-  height: 1px; 
-  padding: 0; 
-  margin: -1px; 
-  overflow: hidden; 
-  clip: rect(0, 0, 0, 0); 
-  border: 0; 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* ==================== Calendar ==================== */
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.month-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.month-solved-badge {
+  background: #ffeb3b;
+  color: #333;
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  font-weight: 600;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.day-header {
+  text-align: center;
+  font-weight: 600;
+  padding: 0.25rem 0;
+  color: var(--text-primary);
+}
+
+.calendar-day {
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  min-height: 70px;
+  position: relative;
+  padding: 0.5rem;
+  background: var(--surface);
+  transition: background 0.3s;
+  cursor: pointer; /* So it's clear you can click it */
+}
+
+.calendar-day:hover {
+  background: #f8f9fa;
+}
+
+.calendar-day.inactive {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.solves-count {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 0.8em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==================== Modal ==================== */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; /* Enable scroll if content is long */
+  background-color: rgba(0, 0, 0, 0.6); /* Overlay effect */
+  z-index: 9999;
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+}
+
+.modal-close {
+  color: #333;
+  font-size: 1.5rem;
+  font-weight: bold;
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  color: #e53935;
+}
+
+#problems-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#problems-table th,
+#problems-table td {
+  border: 1px solid #ddd;
+  padding: 0.75rem;
+  text-align: left;
+}
+.difficulty-easy {
+  background-color: #d4edda; /* Light green */
+  color: #155724; /* Dark green text */
+  font-weight: bold;
+}
+
+.difficulty-medium {
+  background-color: #fff3cd; /* Light yellow */
+  color: #856404; /* Dark yellow text */
+  font-weight: bold;
+}
+
+.difficulty-hard {
+  background-color: #f8d7da; /* Light red */
+  color: #721c24; /* Dark red text */
+  font-weight: bold;
 }
