@@ -35,7 +35,7 @@ body {
   background-color: var(--background);
   color: var(--text-primary);
   line-height: 1.6;
-  overflow-x: hidden; /* Prevent horizontal scroll */
+  overflow-x: hidden;
 }
 
 /* ==================== Container & Sidebar ==================== */
@@ -212,7 +212,7 @@ body {
 }
 
 .progress-bar-container {
-  width: 120px; /* fixed to align all bars */
+  width: 120px;
   background-color: var(--border-color);
   height: 10px;
   border-radius: 5px;
@@ -278,7 +278,6 @@ body {
   box-shadow: 0 4px 8px var(--shadow-color);
 }
 
-/* Collapsible header with consistent alignment */
 .topic-header {
   display: grid;
   grid-template-columns: auto 1fr auto;
@@ -302,7 +301,6 @@ body {
   justify-self: end;
 }
 
-/* Sort Controls on the far right */
 .sort-controls {
   justify-self: end;
   display: inline-block;
@@ -322,7 +320,6 @@ body {
   border-color: var(--primary);
 }
 
-/* Table in Overview's Problem List */
 .topic table {
   width: 100%;
   border-collapse: separate;
@@ -381,7 +378,6 @@ body {
   outline: none;
 }
 
-/* Difficulty Badges */
 td.difficulty-easy {
   background: #C8E6C9;
   color: #2E7D32;
@@ -437,7 +433,6 @@ td.difficulty-hard {
   height: 300px;
 }
 
-/* Topic-Wise Cards Grid */
 .topic-wise-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -447,7 +442,6 @@ td.difficulty-hard {
   margin-top: 20px;
 }
 
-/* ==================== Accordion-Style Cards for Each Topic ==================== */
 .accordion-card {
   background: var(--surface);
   border-radius: 1rem;
@@ -489,15 +483,14 @@ td.difficulty-hard {
 
 .accordion-body {
   margin-top: 1rem;
-  display: none; /* hidden by default; toggled via JS */
+  display: none;
 }
 
 .accordion-body.open {
-  display: block; /* shown when user toggles open */
+  display: block;
   animation: fadeIn 0.3s ease-in;
 }
 
-/* A small stats row with placeholders for "Longest Streak," "Time Spent," etc. */
 .topic-extra-stats {
   display: flex;
   flex-wrap: wrap;
@@ -579,8 +572,6 @@ td.difficulty-hard {
 }
 
 /* ==================== Responsive Design Enhancements ==================== */
-
-/* Larger devices (Desktops and large tablets) */
 @media (max-width: 1200px) {
   .sidebar {
     width: 220px;
@@ -590,7 +581,6 @@ td.difficulty-hard {
   }
 }
 
-/* Medium devices (Tablets) */
 @media (max-width: 992px) {
   .sidebar {
     width: 200px;
@@ -600,7 +590,6 @@ td.difficulty-hard {
   }
 }
 
-/* Small devices (Landscape phones and large portrait phones) */
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
@@ -624,7 +613,7 @@ td.difficulty-hard {
     order: 3;
     flex-direction: row;
     gap: 10px;
-    overflow-x: auto; /* Allow horizontal scroll if needed */
+    overflow-x: auto;
   }
   .nav-link {
     padding: 0.5rem 0.75rem;
@@ -643,8 +632,6 @@ td.difficulty-hard {
   .topic-wise-grid {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   }
-
-  /* Improve touch targets */
   .nav-link,
   .sync-button,
   .refresh-quote-button {
@@ -652,7 +639,6 @@ td.difficulty-hard {
   }
 }
 
-/* Extra small devices (Portrait phones) */
 @media (max-width: 480px) {
   .stat-info h3 {
     font-size: 1em;
@@ -674,22 +660,16 @@ td.difficulty-hard {
   .topic-wise-grid {
     grid-template-columns: 1fr;
   }
-
-  /* Ensure tables are scrollable on very small screens */
   .topic table {
     display: block;
     overflow-x: auto;
   }
-
-  /* Adjust font sizes for better readability */
   body {
     font-size: 14px;
   }
-
   .main-content {
     padding: 1rem;
   }
-
   .refresh-quote-button {
     padding: 0.5rem 0.75rem;
     font-size: 0.9em;
@@ -811,7 +791,7 @@ td.difficulty-hard {
   padding: 0.5rem;
   background: var(--surface);
   transition: background 0.3s;
-  cursor: pointer; /* So it's clear you can click it */
+  cursor: pointer;
 }
 
 .calendar-day:hover {
@@ -840,14 +820,14 @@ td.difficulty-hard {
 
 /* ==================== Modal ==================== */
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
+  display: none;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  overflow: auto; /* Enable scroll if content is long */
-  background-color: rgba(0, 0, 0, 0.6); /* Overlay effect */
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6);
   z-index: 9999;
 }
 
@@ -886,20 +866,42 @@ td.difficulty-hard {
   padding: 0.75rem;
   text-align: left;
 }
+
 .difficulty-easy {
-  background-color: #d4edda; /* Light green */
-  color: #155724; /* Dark green text */
+  background-color: #d4edda;
+  color: #155724;
   font-weight: bold;
 }
 
 .difficulty-medium {
-  background-color: #fff3cd; /* Light yellow */
-  color: #856404; /* Dark yellow text */
+  background-color: #fff3cd;
+  color: #856404;
   font-weight: bold;
 }
 
 .difficulty-hard {
-  background-color: #f8d7da; /* Light red */
-  color: #721c24; /* Dark red text */
+  background-color: #f8d7da;
+  color: #721c24;
   font-weight: bold;
+}
+
+/* ==================== Leaderboard Section ==================== */
+.ranking-section {
+  background: var(--surface);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 8px var(--shadow-color);
+  margin-top: 20px;
+}
+
+#ranking-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#ranking-table th,
+#ranking-table td {
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  text-align: left;
 }
