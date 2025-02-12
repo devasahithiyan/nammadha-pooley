@@ -92,7 +92,7 @@ function getProfileEndpoint(profile) {
     case 'revanth':
       return 'https://alfa-leetcode-api.onrender.com/Revanth2002/acSubmission';
     case 'murali': // New profile: Murali
-      return 'https://leetcode.com/u/Muralidaran/';
+      return 'https://alfa-leetcode-api.onrender.com/Muralidaran/acSubmission';
     default:
       return '';
   }
