@@ -91,8 +91,10 @@ function getProfileEndpoint(profile) {
       return 'https://alfa-leetcode-api.onrender.com/manoharannagarajan/acSubmission';
     case 'revanth':
       return 'https://alfa-leetcode-api.onrender.com/Revanth2002/acSubmission';
-    case 'murali': // New profile: Murali
+    case 'murali':
       return 'https://alfa-leetcode-api.onrender.com/Muralidaran/acSubmission';
+    case 'vishan': // New profile: Vishan
+      return 'https://alfa-leetcode-api.onrender.com/vishan/acSubmission';
     default:
       return '';
   }
@@ -958,7 +960,7 @@ function renderCalendar(year, month) {
 
 /* ==================== Ranking Functions ==================== */
 async function updateRanking() {
-  const profiles = ['Mano', 'deva', 'Ananth', 'revanth', 'murali'];
+  const profiles = ['Mano', 'deva', 'Ananth', 'revanth', 'murali', 'vishan']; // Added vishan
   const rankingData = await Promise.all(profiles.map(async profile => {
     const userRef = collection(db, 'users', profile, 'problems');
     const q = query(userRef, where('completed', '==', true));
