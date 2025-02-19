@@ -86,7 +86,7 @@ function getProfileEndpoint(profile) {
     case 'Ananth':
       return 'https://alfa-leetcode-api.onrender.com/20epci004/acSubmission';
     case 'deva':
-      return 'https://alfa-leetcode-api.onrender.com/devasahithiyan/acSubmission';
+      return 'https://alfa-leetcode-api.onrender.com/qR2Ni1CLa4/acSubmission';
     case 'Mano':
       return 'https://alfa-leetcode-api.onrender.com/manoharannagarajan/acSubmission';
     case 'revanth':
