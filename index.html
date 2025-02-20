@@ -19,6 +19,8 @@
 
     <!-- Chart.js (v4.x recommended) -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Chart.js Zoom Plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@1.2.1/dist/chartjs-plugin-zoom.min.js"></script>
 
     <!-- Main Styles -->
     <link rel="stylesheet" href="styles.css" />
@@ -39,9 +41,15 @@
             <option value="deva">Deva</option>
             <option value="Ananth">Ananth</option>
             <option value="revanth">Revanth</option>
-            <option value="murali">Murali</option> <!-- Existing profile -->
-            <option value="vishan">Vishan</option> <!-- New profile added -->
+            <option value="murali">Murali</option>
+            <option value="vishan">Vishan</option>
           </select>
+        </div>
+
+        <!-- Dark Mode Toggle -->
+        <div class="theme-toggle">
+          <label for="dark-mode-switch">Dark Mode</label>
+          <input type="checkbox" id="dark-mode-switch" />
         </div>
 
         <!-- Navigation Menu -->
@@ -98,10 +106,13 @@
                 <i class="fas fa-chart-line"></i>
               </div>
               <div class="stat-info">
-                <h3>Average Solved Per Day</h3>
-                <div class="chart-container">
-                  <canvas id="average-solved-chart"></canvas>
-                  <span id="average-solved">0</span>
+                <h3>Average Solved / Day</h3>
+                <p id="average-solved-display">0</p>
+                <div class="additional-info">
+                  <small>
+                    Weekly Solved:
+                    <span id="weekly-solved">0</span>
+                  </small>
                 </div>
               </div>
             </div>
@@ -170,59 +181,69 @@
                 </tr>
               </thead>
               <tbody>
-                <!-- Ranking rows will be injected here by JS -->
+                <!-- Ranking rows injected by JS -->
               </tbody>
             </table>
           </section>
         </section>
 
-        <!-- Detailed Analysis Tab -->
+        <!-- Detailed Analysis Tab (Improved UI with Date Range Filter) -->
         <section id="detailed" class="tab-content">
-          <div class="detailed-stats-grid">
+          <h2 class="section-title">Detailed Analysis</h2>
+
+          <!-- Date Range Filter -->
+          <div class="date-range-filter">
+            <label for="start-date">From:</label>
+            <input type="date" id="start-date" />
+            <label for="end-date">To:</label>
+            <input type="date" id="end-date" />
+            <button id="apply-date-filter" class="filter-button">Apply</button>
+            <button id="reset-date-filter" class="filter-button">Reset</button>
+          </div>
+
+          <!-- Summary Stats Section -->
+          <div class="detailed-summary-grid">
             <!-- Total Solved -->
-            <div class="detailed-stat-card">
-              <div class="stat-icon">
-                <i class="fas fa-check-circle"></i>
-              </div>
-              <div class="stat-info">
-                <h3>Total Solved</h3>
-                <p id="detailed-total-solved">0</p>
-              </div>
+            <div class="summary-item">
+              <h3>Total Solved</h3>
+              <p id="detailed-total-solved" class="summary-stat">0</p>
             </div>
-            <!-- Average Solved Per Day -->
-            <div class="detailed-stat-card">
-              <div class="stat-icon">
-                <i class="fas fa-chart-line"></i>
-              </div>
-              <div class="stat-info">
-                <h3>Average Solved Per Day</h3>
-                <p id="detailed-average-solved">0</p>
+
+            <!-- Average Solved / Day -->
+            <div class="summary-item">
+              <h3>Average Solved / Day</h3>
+              <p id="detailed-average-solved" class="summary-stat">0</p>
+              <div class="mini-chart-container">
+                <canvas id="average-solved-chart-detailed"></canvas>
               </div>
             </div>
           </div>
 
-          <!-- Solves Over Time Graph -->
-          <div class="graph-section">
-            <h2>Solves Over Time</h2>
-            <div class="chart-wrapper custom-chart-height">
-              <canvas id="solves-over-time-chart"></canvas>
+          <!-- Charts Row -->
+          <div class="charts-row">
+            <!-- Solves Over Time Chart -->
+            <div class="chart-card">
+              <h3>Solves Over Time</h3>
+              <div class="chart-wrapper custom-chart-height">
+                <canvas id="solves-over-time-chart"></canvas>
+              </div>
             </div>
-          </div>
 
-          <!-- Difficulty Distribution -->
-          <div class="chart-section">
-            <h2>Difficulty Distribution</h2>
-            <div class="chart-wrapper custom-chart-height">
-              <canvas id="difficulty-distribution-chart"></canvas>
+            <!-- Difficulty Distribution Chart -->
+            <div class="chart-card">
+              <h3>Difficulty Distribution</h3>
+              <div class="chart-wrapper custom-chart-height">
+                <canvas id="difficulty-distribution-chart"></canvas>
+              </div>
             </div>
           </div>
 
           <!-- Topic-Wise Detailed Analysis -->
-          <div class="topic-wise-section">
-            <h2>Topic-Wise Detailed Analysis</h2>
+          <div class="topic-wise-analysis">
+            <h3>Topic-Wise Detailed Analysis</h3>
             <p class="tw-intro">
-              View a deeper breakdown of your progress, difficulty distribution, 
-              and potential metrics like “Longest Streak” or “Time Spent” for each topic.
+              View a deeper breakdown of your progress, difficulty distribution,
+              and more detailed stats for each topic.
             </p>
             <div id="topic-wise-grid" class="topic-wise-grid"></div>
           </div>
@@ -248,8 +269,10 @@
     <div id="day-modal" class="modal">
       <div class="modal-content">
         <span id="close-modal" class="modal-close">&times;</span>
-        <h2>Problems on <span id="modal-date"></span></h2>
-        <p id="problems-count" style="margin-bottom:1rem;"></p>
+        <h2>
+          Problems on <span id="modal-date"></span>
+        </h2>
+        <p id="problems-count" style="margin-bottom: 1rem;"></p>
         <table id="problems-table">
           <thead>
             <tr>
